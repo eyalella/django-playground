@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<h2>Apartments:</h2>
+<div class="row">
+  {% for apt in apartments %}
+  <a href="/{{apt.id}}/">
+    <div class="col col-xs-4">
+      <div class="content">
+        <img src="{{apt.image}}" alt="apartment image" />
+        <p>{{apt.size}} SQM</p>
+        <p>{{apt.price}} NIS</p>
+        <p>{{apt.location}}</p>
+      </div>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+<form enctype="multipart/form-data" action="post_apt/" method="post">
+  {% csrf_token %}
+  {{form.as_p}}
+  <input type="submit" name="submit" value="submit">
+</form>
+{% endblock %}
