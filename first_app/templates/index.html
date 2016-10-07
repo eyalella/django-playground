@@ -8,18 +8,21 @@
   <a href="/{{apt.id}}/">
     <div class="col col-xs-4">
       <div class="content">
-        <img src="{{apt.image}}" alt="apartment image" />
+        <img src="media/{{apt.image}}" alt="apartment image" />
         <p>{{apt.size}} SQM</p>
         <p>{{apt.price}} NIS</p>
         <p>{{apt.location}}</p>
+        <p>owner - <a href="/user/{{apt.user}}">{{apt.user}}</a></p>
       </div>
     </div>
   </a>
   {% endfor %}
 </div>
+{% if user.is_authenticated %}
 <form enctype="multipart/form-data" action="post_apt/" method="post">
   {% csrf_token %}
   {{form.as_p}}
   <input type="submit" name="submit" value="submit">
 </form>
+{% endif %}
 {% endblock %}
